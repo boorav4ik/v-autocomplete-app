@@ -1,8 +1,28 @@
-import { Autocomplete, Box, TextField } from "@mui/material";
-import { useId } from "react";
-import { useLazyGetPostsQuery } from "../services/comments";
-
-import type { Comment } from "../services/comments";
+import { cloneElement, forwardRef, useId } from "react";
+import { FixedSizeList as List } from "react-window";
+const VirtualizedListboxComponent = forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLElement>
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+>(function VirtualizedListboxComponent({ children, role, ...props }, ref) {
+  return (
+    <div ref={ref}>
+      <div {...props}>
+        {Array.isArray(children) && (
+          <List
+            //   role={role}
+            height={350}
+            itemCount={children.length}
+            itemSize={92}
+            width="100%"
+          >
+            {({ index, style }) => cloneElement(children[index], { style })}
+          </List>
+        )}
+      </div>
+    </div>
+  );
+});
 
 export default function VAutocomplete() {
   const id = useId();
@@ -15,7 +35,7 @@ export default function VAutocomplete() {
       onOpen={() => !data.length && trigger()}
       sx={{ width: 500 }}
       loading={isLoading}
-      renderInput={(params) => <TextField {...params} label="Movie" />}
+      ListboxComponent={VirtualizedListboxComponent}
       renderOption={(props, option) => (
         <li {...props} key={option.id}>
           <Box component="ul">
