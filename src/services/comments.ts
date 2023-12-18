@@ -11,13 +11,13 @@ export type Comment = {
 export const commentsApi = createApi({
   reducerPath: "commentsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://jsonplaceholder.typicode.com/",
+    baseUrl: "https://jsonplaceholder.typicode.com/comments",
   }),
   endpoints: (builder) => ({
     getPosts: builder.query<Comment[], string | void>({
       query(queryString) {
-        if (queryString) return `comments/?q=${queryString}`;
-        return "comments";
+        if (queryString) return `?q=${queryString}`;
+        return "";
       },
     }),
   }),
