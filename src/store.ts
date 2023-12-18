@@ -3,8 +3,8 @@ import { commentsApi } from "./services/comments";
 
 export const store = configureStore({
   reducer: {
-    [commentsApi.reducerPath]: commentsApi.reducer,
+    [commentsApi.reducerPath]: commentsApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(commentsApi.middleware),
+    getDefaultMiddleware().concat(commentsApi.middleware)
 });
