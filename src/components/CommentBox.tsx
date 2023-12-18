@@ -18,10 +18,8 @@ export default function CommentBox({ data, highlight }: CommentBoxProps) {
         listStyle: "none",
         paddingInlineStart: 1,
         marginBlock: 0.5,
-        width: "99%",
+        width: "99%"
       }}
-      bgcolor="lightgray"
-      borderRadius={1}
     >
       {FIELDS.map((key) => {
         const value = data[key];

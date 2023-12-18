@@ -37,7 +37,12 @@ export default function VAutocomplete<
                 itemSize={itemSize}
                 width="100%"
               >
-                {({ index, style }) => cloneElement(children[index], { style })}
+                {({ index, style }) =>
+                  cloneElement(children[index], {
+                    ...style,
+                    backgroundColor: index % 2 ? "lightgray" : undefined
+                  })
+                }
               </List>
             )}
           </div>
